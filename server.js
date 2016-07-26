@@ -1,23 +1,24 @@
+'use strict';
+
+// import Packages
 var express = require('express');
+var routes = require('./app/routes/index.js');
+var mongoose = require('mongoose');
+
+// get the app, variables, and db running
 var app = express();
+require('dotenv').load();
+mongoose.connect(process.env.MONGO_URI);
 
-// home
-app.get('/api/whoami', function (req, res) {
-  var head = req.headers;
-  var leftP = head['user-agent'].indexOf('(')+1;
-  var rightP = head['user-agent'].indexOf(')');
-  var response = {
-      "ipaddress":head['x-forwarded-for'],
-      "language":head['accept-language'].substring(0,5),
-      "software":head['user-agent'].substring(leftP,rightP)
-  };
-  
-  res.send(JSON.stringify(response));
-});
+// mount middleware and routes
+app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
+app.use('/public', express.static(process.cwd() + '/public'));
+routes(app);
 
-// in case go to the wrong link
-app.get('/', function (req, res) {
-    res.send('<a href="./api/whoami">Go Here Instead</a>');
+// 404 safety blanket
+app.use(function(req, res, next){
+  res.status(404);
+  res.type('txt').send('Not found');
 });
 
 // listen
