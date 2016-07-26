@@ -3,7 +3,7 @@
 var path = process.cwd();
 var shortUrlHandler = require(path + '/app/controllers/shortUrlHandler.server.js');
 
-module.exports = function (app) {
+module.exports = function(app) {
 
     var shortUrlHandler = new shortUrlHandler();
     
