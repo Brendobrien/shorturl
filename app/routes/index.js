@@ -1,20 +1,23 @@
 'use strict';
 
-var path = process.cwd();
-var shortUrlHandler = require(path + '/app/controllers/shortUrlHandler.server.js');
+var ShortUrlHandler = require(process.cwd() + '/app/controllers/shortUrlHandler.server.js');
+console.log(ShortUrlHandler);
+// var ye = new ShortUrlHandler();
+// ye.test();
 
-module.exports = function(app) {
+module.exports = function (app) {
+   var shortUrlHandler = new ShortUrlHandler();
+   shortUrlHandler.handleShortUrl('req','res');
+   shortUrlHandler.addShortUrl();
 
-    var shortUrlHandler = new shortUrlHandler();
-    
-    app.route('/')
-        .get(function (req, res) {
-			res.sendFile(path + '/public/index.html');
-		});
-		
-	app.route('/:shortUrl')
-        .get(shortUrlHandler.handleshortUrl);
-    
-    app.route('/new/*?')
-        .get(shortUrlHandler.addShortUrl)
-}
+   app.route('/')
+      .get(function (req, res) {
+         res.sendFile(process.cwd() + '/public/index.html');
+      });
+
+//  app.route('/:shurl')
+//     .get(shortUrlHandler.handleShortUrl);
+
+//    app.route('/new/*?')
+//       .get(shortUrlHandler.addShortUrl);
+};
