@@ -10,4 +10,6 @@ var counter = new Schema({
 	}
 });
 
+console.log('counter');
+
 module.exports = mongoose.model('counter', counter);

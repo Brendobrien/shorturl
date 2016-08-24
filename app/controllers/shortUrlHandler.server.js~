@@ -5,11 +5,13 @@ var counter = require('../models/counterDB.js');
 
 function shortUrlHandler() {
   this.handleShortUrl = function(req,res){
+    console.log('hsu');
     //  urls
     //     .findOne({'original_url':req.shortUrl})
   }
-
+ 
   this.addShortUrl = function(req,res){
+    console.log('asu');
     //  urls
     //     .findOneAndUpdate();
   }

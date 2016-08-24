@@ -1,9 +1,6 @@
 'use strict';
 
 var ShortUrlHandler = require(process.cwd() + '/app/controllers/shortUrlHandler.server.js');
-console.log(ShortUrlHandler);
-// var ye = new ShortUrlHandler();
-// ye.test();
 
 module.exports = function (app) {
    var shortUrlHandler = new ShortUrlHandler();
