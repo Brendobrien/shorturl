@@ -16,6 +16,7 @@ app.use('/public', express.static(process.cwd() + '/public'));
 routes(app);
 
 // 404 safety blanket
+// never give up on your dreams!
 app.use(function(req, res, next){
   res.status(404);
   res.type('txt').send('Not found');
