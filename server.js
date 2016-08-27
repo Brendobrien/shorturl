@@ -17,6 +17,7 @@ routes(app);
 
 // 404 safety blanket
 // never give up on your dreams!
+// keep calm and keep making GitHub think your sending git commits
 app.use(function(req, res, next){
   res.status(404);
   res.type('txt').send('Not found');
