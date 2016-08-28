@@ -27,5 +27,5 @@ app.use(function(req, res, next){
 // listen
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
-  console.log('Example app listening on port '+port+'!');
+  console.log('Shorturl listening on port '+port);
 });
