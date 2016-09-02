@@ -22,6 +22,7 @@ routes(app);
 // alright I promise this is the last one
 // one more
 // last one
+// and another because I'm curious about a push problem
 app.use(function(req, res, next){
   res.status(404);
   res.type('txt').send('Not found');
