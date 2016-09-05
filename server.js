@@ -24,6 +24,7 @@ routes(app);
 // last one
 // and another because I'm curious about a push problem
 // last last one
+// fantasy draft uknow how it be
 app.use(function(req, res, next){
   res.status(404);
   res.type('txt').send('Not found');
