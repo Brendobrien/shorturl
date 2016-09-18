@@ -5,7 +5,10 @@ var Schema = mongoose.Schema;
 
 var urls = new Schema({
     original_url: String,
-    short_url: Number
+    short_url: {
+        type: String,
+        unique: true
+    }
 });
 
 module.exports = mongoose.model('urls', urls);
