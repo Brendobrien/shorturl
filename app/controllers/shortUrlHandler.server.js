@@ -2,22 +2,30 @@
 
 var urls = require('../models/urlDB.js');
 var counter = require('../models/counterDB.js');
+var validator = require('validator');
 
 function shortUrlHandler() {
 	this.getUrls = function(req,res) {
 	    urls.find((err, users) => {
-	        if (err) throw error;
+	        if (err) throw err;
 
-	        res.json(users); // return all users in JSON format
+	        res.json(users);
 	    });
 	};
 
   this.handleShortUrl = function(req,res){
-    urls.find({short_url: req.params.shurl}, (err, x)=>res.redirect('http://www.google.com'))
+    urls.find({short_url: req.params.shurl}, (err, x)=>{
+    	if(err) throw err;
+
+    	if(x.length)
+    		res.redirect('http://www.google.com')
+    	else
+    		res.json({"error":"that url ain't in the system bruh"})
+	})
   }
 
   this.addShortUrl = function(req,res){
-    getCounter((i)=>res.json(i));
+    getCounter((x)=>makeUrl(req,res,x.cnt));
   }
 }
 
@@ -32,6 +40,24 @@ function getCounter(callback) {
 		    })
 		}
     });
+}
+
+function makeUrl(req,res,i) {
+	// res.json(process.env.APP_URL+"/"+i);
+	if(validator.isURL(req.params[0],{require_protocol: true}))
+		urls.create({
+			original_url: req.params[0],
+	        short_url: i,
+	    }, function (err, url) {
+	        if (err) throw error;
+
+	        res.json({
+	        	original_url: url.original_url,
+	        	short_url: process.env.APP_URL+"/"+url.short_url
+	        });
+	    });
+	else
+		res.json({"error":"i don't think that's a valid url, bruh. make sure u include ur protocol, bruh."})
 }
 
 module.exports = shortUrlHandler;

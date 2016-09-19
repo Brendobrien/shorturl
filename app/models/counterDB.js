@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var counter = new Schema({
 	cnt: {
 		type: Number,
-		default: 1
+		default: 0
 	}
 });
 
