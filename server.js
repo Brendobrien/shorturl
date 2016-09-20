@@ -18,8 +18,6 @@ app.use(morgan('dev'));
 app.set('json spaces', 2);
 
 // mount middleware and routes
-app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
-app.use('/public', express.static(process.cwd() + '/public'));
 routes(app);
 
 app.use(function(req, res, next){

@@ -14,7 +14,6 @@ function shortUrlHandler() {
 	};
 
   this.handleShortUrl = function(req,res){
-    console.log(req.params.shurl);
     urls.findOne({short_url: req.params.shurl}, (err, x)=>{
     	if(err) throw err;
 
