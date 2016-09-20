@@ -14,11 +14,12 @@ function shortUrlHandler() {
 	};
 
   this.handleShortUrl = function(req,res){
-    urls.find({short_url: req.params.shurl}, (err, x)=>{
+    console.log(req.params.shurl);
+    urls.findOne({short_url: req.params.shurl}, (err, x)=>{
     	if(err) throw err;
 
-    	if(x.length)
-    		res.redirect('http://www.google.com')
+    	if(x)
+    		res.redirect(x.original_url)
     	else
     		res.json({"error":"that url ain't in the system bruh"})
 	})
